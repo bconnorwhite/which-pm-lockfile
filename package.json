@@ -1,0 +1,35 @@
+{
+  "name": "which-pm-lockfile",
+  "version": "1.0.0",
+  "description": "Check if a project uses yarn, npm, or pnpm. Supports yarn workspaces.",
+  "author": "Connor White",
+  "license": "MIT",
+  "keywords": [
+    "package",
+    "manager",
+    "yarn",
+    "npm",
+    "pnpm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bconnorwhite/which-pm-lockfile.git"
+  },
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "babel ./src --out-dir ./build --config-file ./babel.config.json --extensions .ts --delete-dir-on-start && tsc --project ./tsconfig.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@bconnorwhite/package": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/node": "^14.0.27",
+    "typescript": "^3.9.7"
+  }
+}
