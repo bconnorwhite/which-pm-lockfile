@@ -21,7 +21,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@bconnorwhite/package": "^3.0.0"
+    "@bconnorwhite/package": "^3.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

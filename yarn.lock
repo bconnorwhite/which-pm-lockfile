@@ -880,10 +880,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bconnorwhite/package@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@bconnorwhite/package/-/package-3.0.0.tgz#5678425b232f0a3263b5c90f1aeb7b397c3a1428"
-  integrity sha512-Vx52T2rYyXwpePM4eTLW1ZDvvU0ZEFfNuHaejSv8YwZ61XQHijQWBOq24kmJZDZqJmoQV/qW+zfLQoLcYQDm0g==
+"@bconnorwhite/package@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@bconnorwhite/package/-/package-3.0.1.tgz#731244028a57d4fe789387a7d3ba9dc2dbb332b4"
+  integrity sha512-pDFw/n5953aX9VPeqJ1F3A/+WdU4pQZTDgGUElS6nyqckYwAlMbcgfzIZRC57eRwWrPx197T4D+d513RnyIiXw==
   dependencies:
     find-workspace-root "^1.0.1"
     path-exists "^4.0.0"
