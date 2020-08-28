@@ -1,6 +1,6 @@
 {
   "name": "which-pm-lockfile",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Check if a project uses yarn, npm, or pnpm. Supports yarn workspaces.",
   "author": "Connor White",
   "license": "MIT",
