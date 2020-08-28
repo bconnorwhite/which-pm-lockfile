@@ -2,8 +2,10 @@ import { exists, existsWorkspace } from "@bconnorwhite/package";
 
 export type PackageManagerName = "yarn" | "npm" | "pnpm";
 
+export type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrinkwrap.yaml";
+
 type Manager = {
-  lockfile: string;
+  lockfile: PackageManagerLockfile;
   workspaces?: boolean;
 }
 
@@ -47,4 +49,8 @@ export function hasPNPM() {
 
 export async function getPackageManagerName() {
   return (await hasYarn() ? "yarn" : (await hasNPM() ? "npm" : (await hasPNPM() ? "pnpm" : undefined)));
+}
+
+export async function getLockfile() {
+  return getPackageManagerName().then((name) => name ? managers[name].lockfile : undefined);
 }

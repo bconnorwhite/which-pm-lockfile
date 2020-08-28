@@ -11,13 +11,27 @@ yarn add which-pm-lockfile
 
 ### Example usage:
 ```js
-import { getPackageManagerName, hasYarn, hasNPM, hasPNPM } from "@bconnorwhite/package";
+import {
+  getPackageManagerName,
+  getLockfile,
+  hasYarn,
+  hasNPM,
+  hasPNPM,
+  PackageManagerName,
+  PackageManagerLockfile
+} from "which-pm-lockfile";
 
-getPackageManagerName() => "yarn" | "npm" | "pnpm";
+getPackageManagerName() => Promise<PackageManagerName | undefined>;
 
-hasYarn() => boolean;
+getLockfile() => Promise<PackageManagerLockfile | undefined>;
 
-hasNPM() => boolean;
+hasYarn() => Promise<boolean>;
 
-hasPNPM() => boolean;
+hasNPM() => Promise<boolean>;
+
+hasPNPM() => Promise<boolean>;
+
+type PackageManagerName = "yarn" | "npm" | "pnpm";
+
+type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrinkwrap.yaml";
 ```
