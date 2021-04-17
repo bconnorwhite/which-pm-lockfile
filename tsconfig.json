@@ -1,22 +1,18 @@
 {
+  "extends": "@bconnorwhite/bob",
   "compilerOptions": {
-    "allowJs": false,
-    "alwaysStrict": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "./build",
-    "removeComments": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "noImplicitAny": true,
+    "rootDirs": [
+      "source",
+      "types"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ]
   },
   "include": [
-    "./src/**/*.ts"
+    "source",
+    "types"
   ]
 }

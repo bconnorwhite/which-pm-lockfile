@@ -1,9 +1,18 @@
 {
   "name": "which-pm-lockfile",
   "version": "1.1.0",
-  "description": "Check if a project uses yarn, npm, or pnpm. Supports yarn workspaces.",
-  "author": "Connor White",
+  "description": "Check if a project uses yarn, npm, or pnpm",
   "license": "MIT",
+  "author": {
+    "name": "Connor White",
+    "email": "connor.bcw@gmail.com",
+    "url": "https://connorwhite.org"
+  },
+  "homepage": "https://connorwhite.org/github/which-pm-lockfile",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bconnorwhite/which-pm-lockfile.git"
+  },
   "keywords": [
     "package",
     "manager",
@@ -11,25 +20,34 @@
     "npm",
     "pnpm"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bconnorwhite/which-pm-lockfile.git"
-  },
+  "files": [
+    "build"
+  ],
   "main": "./build/index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./build --config-file ./babel.config.json --extensions .ts --delete-dir-on-start && tsc --project ./tsconfig.json",
-    "prepublishOnly": "yarn build"
+    "build": "bob build",
+    "commit": "bob commit",
+    "lint": "bob lint",
+    "release": "bob release",
+    "test": "bob test"
   },
   "dependencies": {
-    "@bconnorwhite/package": "^3.0.1"
+    "@bconnorwhite/package": "^4.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-transform-runtime": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-typescript": "^7.10.4",
-    "@types/node": "^14.0.27",
-    "typescript": "^3.9.7"
+    "@bconnorwhite/bob": "^2.9.4",
+    "@types/mock-fs": "^4.13.0",
+    "mock-fs": "^4.13.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-bob"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "bob lint commit"
+    }
+  },
+  "npmpackagejsonlint": {
+    "extends": "npm-package-json-lint-config-bob"
   }
 }
