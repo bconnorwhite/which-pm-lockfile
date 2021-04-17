@@ -7,7 +7,7 @@
     <img alt="TypeScript" src="https://img.shields.io/github/languages/top/bconnorwhite/which-pm-lockfile.svg">
   </a>
   <a href="https://coveralls.io/github/bconnorwhite/which-pm-lockfile?branch=master">
-    <img alt="Coverage Status" src="https://coveralls.io/repos/github/bconnorwhite/which-pm-lockfile.svg?branch=master">
+    <img alt="Coverage Status" src="https://coveralls.io/repos/github/bconnorwhite/which-pm-lockfile/badge.svg?branch=master">
   </a>
   <a href="https://github.com/bconnorwhite/which-pm-lockfile">
     <img alt="GitHub Stars" src="https://img.shields.io/github/stars/bconnorwhite/which-pm-lockfile?label=Stars%20Appreciated%21&style=social">
