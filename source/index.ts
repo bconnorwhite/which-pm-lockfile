@@ -7,7 +7,7 @@ export type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrink
 type Manager = {
   lockfile: PackageManagerLockfile;
   workspaces?: boolean;
-}
+};
 
 const managers: {
   [name in PackageManagerName]: Manager;
@@ -22,7 +22,7 @@ const managers: {
   pnpm: {
     lockfile: "shrinkwrap.yaml"
   }
-}
+};
 
 async function hasManager({ lockfile, workspaces }: Manager) {
   const hasLockfile = await exists(lockfile);
@@ -52,5 +52,7 @@ export async function getPackageManagerName() {
 }
 
 export async function getLockfile() {
-  return getPackageManagerName().then((name) => name ? managers[name].lockfile : undefined);
+  return getPackageManagerName().then((name) => {
+    return name ? managers[name].lockfile : undefined;
+  });
 }
