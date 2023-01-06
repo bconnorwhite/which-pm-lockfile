@@ -1,37 +1,33 @@
-import { exists, existsWorkspace } from "@bconnorwhite/package";
+import { root, file } from "file-structure";
+import findWorkspaceRoot from "find-workspace-root";
 
-export type PackageManagerName = "yarn" | "npm" | "pnpm";
+export type PackageManagerName = keyof typeof managers;
 
-export type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrinkwrap.yaml";
+export type PackageManagerLockfile = typeof managers[PackageManagerName];
 
-type Manager = {
-  lockfile: PackageManagerLockfile;
-  workspaces?: boolean;
-};
+const managers = {
+  yarn: "yarn.lock",
+  npm: "package-lock.json",
+  pnpm: "pnpm-lock.yaml"
+} as const;
 
-const managers: {
-  [name in PackageManagerName]: Manager;
-} = {
-  yarn: {
-    lockfile: "yarn.lock",
-    workspaces: true
-  },
-  npm: {
-    lockfile: "package-lock.json"
-  },
-  pnpm: {
-    lockfile: "shrinkwrap.yaml"
-  }
-};
-
-async function hasManager({ lockfile, workspaces }: Manager) {
-  const hasLockfile = await exists(lockfile);
+async function hasManager(lockfile: string) {
+  const structure = root({
+    lock: file(lockfile)
+  });
+  const hasLockfile = await structure.files().lock.exists();
   if(hasLockfile) {
     return hasLockfile;
-  } else if(workspaces) {
-    return Boolean(await existsWorkspace(lockfile));
   } else {
-    return false;
+    const workspaceRoot = await findWorkspaceRoot();
+    if(workspaceRoot) {
+      const workspaceStructure = root(workspaceRoot, {
+        lock: file(lockfile)
+      });
+      return workspaceStructure.files().lock.exists();
+    } else {
+      return false;
+    }
   }
 }
 
@@ -53,6 +49,6 @@ export async function getPackageManagerName() {
 
 export async function getLockfile() {
   return getPackageManagerName().then((name) => {
-    return name ? managers[name].lockfile : undefined;
+    return name ? managers[name] : undefined;
   });
 }
