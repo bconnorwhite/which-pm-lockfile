@@ -8,28 +8,23 @@ beforeEach(() => {
 
 afterEach(restore);
 
-test("yarn", async (done) => {
+test("yarn", async () => {
   expect(await hasYarn()).toBe(false);
-  done?.();
 });
 
-test("npm", async (done) => {
+test("npm", async () => {
   expect(await hasNPM()).toBe(false);
-  done?.();
 });
 
-test("pnpm", async (done) => {
+test("pnpm", async () => {
   expect(await hasPNPM()).toBe(false);
-  done?.();
 });
 
-test("yarn", async (done) => {
+test("yarn", async () => {
   expect(await getPackageManagerName()).toBe(undefined);
-  done?.();
 });
 
-test("yarn", async (done) => {
+test("yarn", async () => {
   expect(await getLockfile()).toBe(undefined);
-  done?.();
 });
 
