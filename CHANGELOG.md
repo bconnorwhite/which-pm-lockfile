@@ -1,3 +1,8 @@
+## [2.0.0](https://github.com/bconnorwhite/which-pm-lockfile/compare/v1.1.2...v2.1.3) (2023-01-06)
+
+* Migrate to ESM
+
+
 ## [1.1.2](https://github.com/bconnorwhite/which-pm-lockfile/compare/v1.1.1...v1.1.2) (2021-04-17)
 
 
