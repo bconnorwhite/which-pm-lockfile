@@ -19,7 +19,7 @@ async function hasManager(lockfile: string) {
   if(hasLockfile) {
     return hasLockfile;
   } else {
-    const workspaceRoot = await findWorkspaceRoot();
+    const workspaceRoot = await ((findWorkspaceRoot as any).default as typeof findWorkspaceRoot)();
     if(workspaceRoot) {
       const workspaceStructure = root(workspaceRoot, {
         lock: file(lockfile)
