@@ -1,10 +1,10 @@
 import { test, expect, beforeEach, afterEach } from "@jest/globals";
 import mock, { restore } from "mock-fs";
-import { hasYarn, hasNPM, hasPNPM, hasBun, getPackageManagerName, getLockfile } from "../source/index.js";
+import { hasYarn, hasNPM, hasPNPM, getPackageManagerName, getLockfile, hasBun } from "../source/index.js";
 
 beforeEach(() => {
   mock({
-    "package-lock.json": "TEST"
+    "bun.lockb": "TEST"
   });
 });
 
@@ -15,7 +15,7 @@ test("yarn", async () => {
 });
 
 test("npm", async () => {
-  expect(await hasNPM()).toBe(true);
+  expect(await hasNPM()).toBe(false);
 });
 
 test("pnpm", async () => {
@@ -23,14 +23,16 @@ test("pnpm", async () => {
 });
 
 test("bun", async () => {
-  expect(await hasBun()).toBe(false);
+  expect(await hasBun()).toBe(true);
 });
 
 test("pm name", async () => {
-  expect(await getPackageManagerName()).toBe("npm");
+  expect(await getPackageManagerName()).toBe("bun");
 });
 
 test("lockfile", async () => {
-  expect(await getLockfile()).toBe("package-lock.json");
+  expect(await getLockfile()).toBe("bun.lockb");
 });
+
+
 

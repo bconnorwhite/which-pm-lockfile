@@ -14,7 +14,7 @@
 
 <br />
 
-<blockquote align="center">Check if a project uses yarn, npm, or pnpm.</blockquote>
+<blockquote align="center">Get the path to a project's npm, yarn, pnpm, or bun lockfile.</blockquote>
 
 <br />
 
@@ -34,15 +34,19 @@ _DM me on [Twitter](https://twitter.com/bconnorwhite) if you have questions or s
 ## Installation
 
 ```sh
-yarn add which-pm-lockfile
-```
-
-```sh
 npm install which-pm-lockfile
 ```
 
 ```sh
+yarn add which-pm-lockfile
+```
+
+```sh
 pnpm add which-pm-lockfile
+```
+
+```sh
+bun add which-pm-lockfile
 ```
 
 ## Usage
@@ -50,26 +54,21 @@ pnpm add which-pm-lockfile
 import {
   getPackageManagerName,
   getLockfile,
-  hasYarn,
+  getLockfilePath,
   hasNPM,
+  hasYarn,
   hasPNPM,
-  PackageManagerName,
-  PackageManagerLockfile
+  hasBun
 } from "which-pm-lockfile";
 
-getPackageManagerName() => Promise<PackageManagerName | undefined>;
+const pmName = await getPackageManagerName(); // "npm" | "yarn" | "pnpm" | "bun"
 
-getLockfile() => Promise<PackageManagerLockfile | undefined>;
+const lockfile = await getLockfile(); // "package-lock.json" | "yarn.lock" | "shrinkwrap.yaml" | "bun.lockb"
 
-hasYarn() => Promise<boolean>;
-
-hasNPM() => Promise<boolean>;
-
-hasPNPM() => Promise<boolean>;
-
-type PackageManagerName = "yarn" | "npm" | "pnpm";
-
-type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrinkwrap.yaml";
+const npm = await hasNPM(); // true | false
+const yarn = await hasYarn(); // true | false
+const pnpm = await hasPNPM(); // true | false
+const bun = await hasBun(); // true | false
 ```
 
 <!--BEGIN FOOTER-->
@@ -79,7 +78,7 @@ type PackageManagerLockfile = "yarn.lock" | "package-lock.json" | "shrinkwrap.ya
 <h2 id="dependencies">Dependencies<a href="https://www.npmjs.com/package/which-pm-lockfile?activeTab=dependencies"><img align="right" alt="dependencies" src="https://img.shields.io/librariesio/release/npm/which-pm-lockfile.svg"></a></h2>
 
 - [file-structure](https://www.npmjs.com/package/file-structure): Define and manage file structures
-- [find-workspace-root](https://www.npmjs.com/package/find-workspace-root): Find the root of a multi-package repo with Yarn workspaces
+- [root-pkg-dir](https://www.npmjs.com/package/root-pkg-dir): Find the highest directory with a package.json, starting from from the current working directory.
 
 <br />
 

@@ -1,6 +1,6 @@
 import { test, expect, beforeEach, afterEach } from "@jest/globals";
 import mock, { restore } from "mock-fs";
-import { hasYarn, hasNPM, hasPNPM, getPackageManagerName, getLockfile } from "../source/index.js";
+import { hasYarn, hasNPM, hasPNPM, getPackageManagerName, getLockfile, getPNPMLockfilePath, getLockfilePath } from "../source/index.js";
 
 beforeEach(() => {
   mock({});
@@ -20,11 +20,18 @@ test("pnpm", async () => {
   expect(await hasPNPM()).toBe(false);
 });
 
-test("yarn", async () => {
-  expect(await getPackageManagerName()).toBe(undefined);
-});
-
-test("yarn", async () => {
+test("bun", async () => {
   expect(await getLockfile()).toBe(undefined);
 });
 
+test("pm name", async () => {
+  expect(await getPackageManagerName()).toBe(undefined);
+});
+
+test("lockfile", async () => {
+  expect(await getLockfile()).toBe(undefined);
+});
+
+test("lockfile path", async () => {
+  expect(await getLockfilePath()).toBeUndefined();
+});

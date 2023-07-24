@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "file-structure": "^1.6.2",
-    "find-workspace-root": "^1.0.1"
+    "root-pkg-dir": "^1.0.0"
   },
   "devDependencies": {
     "@types/mock-fs": "^4.13.0",

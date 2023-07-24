@@ -1,5 +1,5 @@
 import { root, file } from "file-structure";
-import findWorkspaceRoot from "find-workspace-root";
+import { rootPkgDir } from "root-pkg-dir";
 
 export type PackageManagerName = keyof typeof managers;
 
@@ -8,47 +8,107 @@ export type PackageManagerLockfile = typeof managers[PackageManagerName];
 const managers = {
   yarn: "yarn.lock",
   npm: "package-lock.json",
-  pnpm: "pnpm-lock.yaml"
+  pnpm: "pnpm-lock.yaml",
+  bun: "bun.lockb"
 } as const;
 
-async function hasManager(lockfile: string) {
+async function lockfilePath(lockfile: string) {
   const structure = root({
     lock: file(lockfile)
   });
-  const hasLockfile = await structure.files().lock.exists();
+  const lock = structure.files().lock;
+  const hasLockfile = await lock.exists();
   if(hasLockfile) {
-    return hasLockfile;
+    return lock.path;
   } else {
-    const workspaceRoot = await ((findWorkspaceRoot as any).default as typeof findWorkspaceRoot)();
-    if(workspaceRoot) {
-      const workspaceStructure = root(workspaceRoot, {
+    const rootDir = await rootPkgDir();
+    if(rootDir) {
+      const rootStructure = root(rootDir, {
         lock: file(lockfile)
       });
-      return workspaceStructure.files().lock.exists();
+      const rootLock = rootStructure.files().lock;
+      return await rootLock.exists() ? rootLock.path : false;
     } else {
       return false;
     }
   }
 }
-
-export function hasYarn() {
-  return hasManager(managers.yarn);
+export function getBunLockfilePath() {
+  return lockfilePath(managers.bun);
+}
+export function getPNPMLockfilePath() {
+  return lockfilePath(managers.pnpm);
+}
+export function getYarnLockfilePath() {
+  return lockfilePath(managers.yarn);
+}
+export function getNPMLockfilePath() {
+  return lockfilePath(managers.npm);
 }
 
-export function hasNPM() {
-  return hasManager(managers.npm);
+async function has(getLockfilePath: () => Promise<string | false>) {
+  const lockfilePath = await getLockfilePath();
+  return Boolean(lockfilePath);
 }
 
-export function hasPNPM() {
-  return hasManager(managers.pnpm);
+export async function hasBun() {
+  return has(getBunLockfilePath);
+}
+
+export async function hasPNPM() {
+  return has(getPNPMLockfilePath);
+}
+
+export async function hasYarn() {
+  return has(getYarnLockfilePath);
+}
+
+export async function hasNPM() {
+  return has(getNPMLockfilePath);
 }
 
 export async function getPackageManagerName() {
-  return (await hasYarn() ? "yarn" : (await hasNPM() ? "npm" : (await hasPNPM() ? "pnpm" : undefined)));
+  const bun = await hasBun();
+  if(bun) {
+    return "bun";
+  }
+  const pnpm = await hasPNPM();
+  if(pnpm) {
+    return "pnpm";
+  }
+  const yarn = await hasYarn();
+  if(yarn) {
+    return "yarn";
+  }
+  const npm = await hasNPM();
+  if(npm) {
+    return "npm";
+  }
+  return undefined;
 }
 
 export async function getLockfile() {
   return getPackageManagerName().then((name) => {
     return name ? managers[name] : undefined;
   });
+}
+
+export async function getLockfilePath() {
+  const bun = await getBunLockfilePath();
+  if(bun) {
+    return bun;
+  }
+  const pnpm = await getPNPMLockfilePath();
+  if(pnpm) {
+    return pnpm;
+  }
+  const yarn = await getYarnLockfilePath();
+  if(yarn) {
+    return yarn;
+  }
+  const npm = await getNPMLockfilePath();
+  if(npm) {
+    return npm;
+  }
+  return undefined;
 }
