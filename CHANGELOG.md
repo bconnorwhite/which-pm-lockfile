@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/bconnorwhite/which-pm-lockfile/compare/v2.0.1...v2.1.0) (2023-07-24)
+
+
+### Features
+
+* add support for bun, and full lockfile paths ([6c9d3e0](https://github.com/bconnorwhite/which-pm-lockfile/commit/6c9d3e0e6ae297a45513db8387aa439137292dc9))
+
+
+
 ## [2.0.1](https://github.com/bconnorwhite/which-pm-lockfile/compare/v2.0.0...v2.0.1) (2023-01-07)
 
 
