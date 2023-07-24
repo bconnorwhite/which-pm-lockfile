@@ -1,6 +1,6 @@
 {
   "name": "which-pm-lockfile",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Check if a project uses yarn, npm, or pnpm",
   "main": ".auto/build/index.js",
   "author": "Connor White",
